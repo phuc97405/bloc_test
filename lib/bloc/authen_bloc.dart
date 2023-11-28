@@ -1,39 +1,53 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_test/bloc/authen_event.dart';
-import 'package:bloc_test/service/auth_service.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:bloc_test/service/interface_auth_service.dart';
 part 'authen_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final IAuthService authService;
+  final 
 
   AuthBloc(this.authService) : super(const AuthState.unknown()) {
-    on<AuthEvent>((event, emit) async {
+    on<AppStarted>((event, emit) async {
       try {
-        if (await authService.isLoggedln()) {
+        if (await authService.isLoggedIn()) {
           await authService.updateTokenFromStorage();
           emit(const AuthState.authenticated());
         } else {
           emit((await authService.isFirstEntry())
               ? const AuthState.firstEntry()
-              : AuthState.guest());
+              : const AuthState.guest());
         }
       } on SocketException {
         emit(const AuthState.error(error: AuthError.hostUnreachable));
       } catch (e) {
+        log(e.toString());
         emit(const AuthState.error());
       }
     });
-
-//     on((event, emit) async {
-
-// final response=await authService.login(phone: event.phone, password: event.password);
-// if(response.token!=null)
-
-//     })
+    on<LoginRequested>((event, emit) async {
+      // final response =
+      //     await authService.login(email: event.email, password: event.password);
+      // if (response.token != null) {
+      //   log(response.token!);
+      //   await authService.updateToken(response.token);
+      //   await authService.updateLoggedIn(true);
+      //   emit(const AuthState.authenticated());
+      // } else {
+      //   add(LogoutRequested());
+      //   emit(const AuthState.error(error: AuthError.wrongEmailOrPassword));
+      // }
+    });
+    on<LogoutRequested>((event, emit) async {
+      try {
+        await authService.signOut();
+        emit(const AuthState.guest());
+      } catch (e) {
+        log(e.toString());
+      }
+    });
   }
 }
 
