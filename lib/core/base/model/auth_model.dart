@@ -6,6 +6,9 @@ Data dataUserFromJson(String str) => Data.fromJson(json.decode(str));
 
 String userToJson(ResponseUser data) => json.encode(data.toJson());
 
+String tokenToJson(Token str) => jsonEncode(str.toJson());
+Token tokenFromJson(String str) => Token.fromJson(jsonDecode(str));
+
 class ResponseUser {
   bool status;
   String message;

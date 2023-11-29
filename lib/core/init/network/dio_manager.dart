@@ -34,7 +34,10 @@ class DioManager {
     }, onError: (error, handle) async {
       if (error.response?.statusCode == 401) {
         //token is authorized
-        await authService.refreshToken();
+        final newAccessToken = await authService.refreshToken();
+        if (newAccessToken != null) {
+          dio.options.headers['Authorization'] = 'Bearer $newAccessToken';
+        }
       }
       return handle.next(error);
     }));

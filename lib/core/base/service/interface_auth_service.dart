@@ -1,3 +1,5 @@
+import 'package:bloc_test/core/base/model/auth_model.dart';
+
 import '../../init/network/dio_manager.dart';
 
 abstract class IAuthService {
@@ -5,7 +7,7 @@ abstract class IAuthService {
 
   IAuthService(this.dioManager);
 
-  Future<String?> login({
+  Future<Token?> login({
     required String phone,
     required String password,
   });

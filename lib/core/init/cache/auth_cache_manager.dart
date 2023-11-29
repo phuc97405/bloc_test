@@ -1,3 +1,5 @@
+import 'package:bloc_test/core/base/model/auth_model.dart';
+
 import '../../constants/enums/network_enums.dart';
 import '../network/dio_manager.dart';
 import 'cache_manager.dart';
@@ -23,11 +25,11 @@ class AuthCacheManager {
     await CacheManager.setBool(NetworkEnums.login.path, isLoggedIn);
   }
 
-  Future<void> updateToken(String? token) async {
+  Future<void> updateToken(Token? token) async {
     if (token != null) {
-      await CacheManager.setString(NetworkEnums.token.path, token);
+      await CacheManager.setString(NetworkEnums.token.path, tokenToJson(token));
       DioManager.instance.dio.options
-          .headers[(MapEntry('Authorization', 'token $token'))];
+          .headers[(MapEntry('Authorization', 'token ${token.accessToken}'))];
 
       /// Actually, we will not need it for this application.
       /// But I've included it here for instructive purposes.
@@ -42,9 +44,10 @@ class AuthCacheManager {
   Future<void> updateTokenFromStorage() async {
     if (await CacheManager.containsKey(NetworkEnums.token.path)) {
       final token = await CacheManager.getString(NetworkEnums.token.path);
-      if (token != null) {
-        DioManager.instance.dio.options
-            .headers[(MapEntry('Authorization', 'token $token'))];
+      final Token tokenParse = tokenFromJson(token!);
+      if (token.isNotEmpty) {
+        DioManager.instance.dio.options.headers[
+            (MapEntry('Authorization', 'token ${tokenParse.accessToken}'))];
 
         /// Actually, we will not need it for this application.
         /// But I've included it here for instructive purposes.

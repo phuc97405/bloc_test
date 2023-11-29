@@ -11,7 +11,7 @@ class AuthService extends IAuthService {
   AuthService(super.dioManager);
   late AuthCacheManager authCacheManager;
   @override
-  Future<String?> login({
+  Future<Token?> login({
     required String phone,
     required String password,
   }) async {
@@ -25,7 +25,7 @@ class AuthService extends IAuthService {
     print('response: $response');
 
     if (response.statusCode == HttpStatus.ok) {
-      return ResponseUser.fromJson(response.data).data.token.accessToken;
+      return ResponseUser.fromJson(response.data).data.token;
     } else {
       return throw Exception();
     }
@@ -34,15 +34,15 @@ class AuthService extends IAuthService {
   Future<String?> refreshToken() async {
     try {
       if (await CacheManager.containsKey(NetworkEnums.token.path)) {
-        final refreshToken =
-            await CacheManager.getString(NetworkEnums.token.path);
-
-        if (refreshToken != null) {
+        final token = await CacheManager.getString(NetworkEnums.token.path);
+        final Token tokenParse = tokenFromJson(token!);
+        if (token.isNotEmpty) {
           final response = await dioManager.dio.post('/authentication/refresh',
-              data: {'refreshToken': refreshToken});
+              data: {'refreshToken': tokenParse.refreshToken});
           final newAccessToken =
-              ResponseUser.fromJson(response.data).data.token.accessToken;
+              ResponseUser.fromJson(response.data).data.token;
           await authCacheManager.updateToken(newAccessToken);
+          return ResponseUser.fromJson(response.data).data.token.accessToken;
         }
       }
     } catch (exception) {

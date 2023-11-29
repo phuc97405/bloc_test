@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:bloc_test/core/base/model/auth_model.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<LoginRequested>(
       (event, emit) async {
-        final String? response = await authService.login(
+        final Token? response = await authService.login(
             phone: event.phone, password: event.password);
         print('response token: $response');
         if (response != null) {
