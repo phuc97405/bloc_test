@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class StringConstants {
   const StringConstants._();
 
-  static const String appName = 'Bloc BusApp';
+  static const String appName = 'BusApp';
 
   /// for Login view
   static const String loginTitle = "You can log in with your information.";

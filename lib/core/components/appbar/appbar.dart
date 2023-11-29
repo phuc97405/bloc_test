@@ -50,12 +50,12 @@ class _CustomAppBarState extends State<CustomAppBar> {
             ? IconButton(
                 onPressed: () {
                   context.read<AuthBloc>().add(LogoutRequested());
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginView(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const LoginView(),
+                  //   ),
+                  // );
                 },
                 icon: const Icon(
                   Icons.logout_outlined,

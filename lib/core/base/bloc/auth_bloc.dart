@@ -19,12 +19,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AppStarted>((event, emit) async {
       try {
         if (await authCacheManager.isLoggedIn()) {
+          print('authen');
           await authCacheManager.updateTokenFromStorage();
           emit(const AuthState.authenticated());
         } else {
-          emit((await authCacheManager.isFirstEntry())
-              ? const AuthState.firstEntry()
-              : const AuthState.guest());
+          print('guest');
+          // emit((await authCacheManager.isFirstEntry())
+          //     ? const AuthState.firstEntry()
+          emit(const AuthState.guest());
         }
       } on SocketException {
         emit(const AuthState.error(error: AuthError.hostUnreachable));
@@ -54,7 +56,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         await authCacheManager.signOut();
         emit(const AuthState.guest());
-      } catch (_) {}
+      } catch (_) {
+        print(_);
+      }
     });
   }
 }

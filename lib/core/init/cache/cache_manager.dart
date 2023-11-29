@@ -4,7 +4,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 @immutable
 class CacheManager {
   const CacheManager._();
-
   static const _androidOptions =
       AndroidOptions(encryptedSharedPreferences: true);
   static const _iosOptions =

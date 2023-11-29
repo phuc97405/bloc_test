@@ -3,9 +3,9 @@ import '../network/dio_manager.dart';
 import 'cache_manager.dart';
 
 class AuthCacheManager {
-  Future<bool> isFirstEntry() async {
-    return !(await CacheManager.getBool(NetworkEnums.introOff.path) ?? false);
-  }
+  // Future<bool> isFirstEntry() async {
+  //   return !(await CacheManager.getBool(NetworkEnums.introOff.path) ?? false);
+  // }
 
   Future<bool> isLoggedIn() async {
     return (await CacheManager.getBool(NetworkEnums.login.path)) ?? false;
@@ -15,9 +15,9 @@ class AuthCacheManager {
     await CacheManager.clearAll();
   }
 
-  Future<void> updateFirstEntry() async {
-    await CacheManager.setBool(NetworkEnums.introOff.path, true);
-  }
+  // Future<void> updateFirstEntry() async {
+  //   await CacheManager.setBool(NetworkEnums.introOff.path, true);
+  // }
 
   Future<void> updateLoggedIn(bool isLoggedIn) async {
     await CacheManager.setBool(NetworkEnums.login.path, isLoggedIn);
