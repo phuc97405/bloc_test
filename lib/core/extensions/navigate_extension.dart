@@ -13,6 +13,7 @@ extension NavigateExtension on AuthStatus {
       case AuthStatus.unknown:
 
         /// MARK: It can be IntroView.
+
         break;
     }
     return const LoginView();

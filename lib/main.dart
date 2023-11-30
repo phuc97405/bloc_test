@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bloc_test/core/base/bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
 import 'package:bloc_test/core/base/service/auth_service.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';

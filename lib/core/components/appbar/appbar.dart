@@ -1,4 +1,5 @@
-import 'package:bloc_test/core/base/bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/functions/base_functions.dart';
 import 'package:bloc_test/core/components/text/custom_text.dart';
 import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
@@ -24,10 +25,11 @@ class CustomAppBar extends AppBar {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
+  final BaseFunctions baseFunctions = BaseFunctions.instance;
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstants.primary,
       elevation: 1,
       centerTitle: true,
       title: Row(
@@ -45,17 +47,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
         ],
       ),
+      automaticallyImplyLeading: false,
       actions: [
         widget.isHome
             ? IconButton(
                 onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return baseFunctions.platformIndicator();
+                      });
                   context.read<AuthBloc>().add(LogoutRequested());
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const LoginView(),
-                  //   ),
-                  // );
                 },
                 icon: const Icon(
                   Icons.logout_outlined,

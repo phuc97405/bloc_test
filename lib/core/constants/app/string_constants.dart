@@ -5,6 +5,7 @@ class StringConstants {
   const StringConstants._();
 
   static const String appName = 'BusApp';
+  static const String fontFamily = '';
 
   /// for Login view
   static const String loginTitle = "You can log in with your information.";

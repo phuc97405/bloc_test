@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bloc_test/core/base/bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
 import 'package:bloc_test/core/constants/enums/icon_enums.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/image_extensions.dart';
@@ -35,8 +35,11 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     authStream = authBloc.stream.listen((state) {
-      Future.delayed(const Duration(seconds: 2)).then((_) =>
-          NavigateUtil().navigateToView(context, state.status.firstView));
+      Future.delayed(const Duration(seconds: 2))
+          .then((_) => NavigateUtil.navigateToView(
+                context,
+                state.status.firstView,
+              ));
     });
   }
 

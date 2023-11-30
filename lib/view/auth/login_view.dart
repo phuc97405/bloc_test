@@ -1,14 +1,19 @@
-import 'package:bloc_test/core/base/bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/functions/base_functions.dart';
 import 'package:bloc_test/core/components/appbar/appbar.dart';
 import 'package:bloc_test/core/components/button/button.dart';
 import 'package:bloc_test/core/components/text/custom_text.dart';
 import 'package:bloc_test/core/components/textFormField/text_form_field.dart';
+import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
+import 'package:bloc_test/core/constants/enums/auth_enums.dart';
 import 'package:bloc_test/core/constants/enums/icon_enums.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/image_extensions.dart';
 import 'package:bloc_test/core/extensions/num_extensions.dart';
+import 'package:bloc_test/core/utils/navigate_util.dart';
 import 'package:bloc_test/core/utils/validate_operations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +26,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final BaseFunctions baseFunctions = BaseFunctions.instance;
   TextEditingController phoneController =
       TextEditingController(text: '08408408408');
   TextEditingController passwordController =
@@ -48,6 +54,11 @@ class _LoginViewState extends State<LoginView> {
                   _PasswordFormField(passwordController: passwordController),
                   _LoginButton(
                     onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return baseFunctions.platformIndicator();
+                          });
                       if (validate != null && validate == true) {
                         context.read<AuthBloc>().add(LoginRequested(
                               phoneController.text.trim(),

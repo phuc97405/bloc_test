@@ -5,8 +5,8 @@ import 'package:bloc_test/core/base/model/auth_model.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../constants/enums/auth_enums.dart';
-import '../service/interface_auth_service.dart';
+import '../../../constants/enums/auth_enums.dart';
+import '../../service/interface_auth_service.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

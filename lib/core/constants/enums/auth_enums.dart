@@ -1,7 +1,3 @@
 enum AuthStatus { unknown, authenticated, guest }
 
-enum AuthError {
-  hostUnreachable,
-  unknown,
-  wrongEmailOrPassword,
-}
+enum AuthError { hostUnreachable, unknown, wrongEmailOrPassword }
