@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-            backgroundColor: ColorConstants.onPrimary,
+            backgroundColor: ColorConstants.instance.onPrimary,
             fixedSize: Size(
               context.dynamicWidth(1),
               context.dynamicHeight(0.06),

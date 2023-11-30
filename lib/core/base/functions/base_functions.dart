@@ -17,8 +17,8 @@ class BaseFunctions {
     return Center(
       child: Platform.isIOS
           ? const CupertinoActivityIndicator()
-          : const CircularProgressIndicator(
-              color: ColorConstants.onPrimary,
+          : CircularProgressIndicator(
+              color: ColorConstants.instance.onPrimary,
             ),
     );
   }

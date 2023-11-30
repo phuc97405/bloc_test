@@ -5,7 +5,6 @@ import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/image_extensions.dart';
 import 'package:bloc_test/core/extensions/num_extensions.dart';
-import 'package:bloc_test/view/auth/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +28,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorConstants.primary,
+      backgroundColor: ColorConstants.instance.primary,
+      // ColorConstants.primary,
       elevation: 1,
       centerTitle: true,
       title: Row(
@@ -59,9 +59,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       });
                   context.read<AuthBloc>().add(LogoutRequested());
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.logout_outlined,
-                  color: ColorConstants.black,
+                  color: ColorConstants.instance.black,
                 ),
               )
             : const SizedBox.shrink(),

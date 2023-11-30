@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
-@immutable
 class ColorConstants {
-  // const ColorConstants._();
+  static ColorConstants? _instance;
+  static ColorConstants get instance {
+    _instance ??= ColorConstants._init();
+    return _instance!;
+  }
 
-  static const Color black = Color(0xFF252525);
-  static const Color primary = Color(0xffCADEAF);
-  static const Color onPrimary = Color(0xff628941);
-  static const Color teal = Color(0xff37A492);
+  ColorConstants._init();
+
+  Color black = const Color(0xFF252525);
+  Color primary = const Color(0xffCADEAF);
+  Color onPrimary = const Color(0xff628941);
+  Color teal = const Color(0xff37A492);
 }

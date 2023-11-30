@@ -17,25 +17,25 @@ class TextThemeLight {
   final TextStyle headline1 = TextStyle(
     fontSize: 17.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.black,
+    color: ColorConstants.instance.black,
   );
 
   final TextStyle headline2 = TextStyle(
     fontSize: 18.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.black,
+    color: ColorConstants.instance.black,
   );
 
   final TextStyle subtitle1 = TextStyle(
     fontSize: 11.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.black,
+    color: ColorConstants.instance.black,
   );
 
   final TextStyle subtitle2 = TextStyle(
     fontSize: 15.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.black,
+    color: ColorConstants.instance.black,
   );
 
   final TextStyle button = TextStyle(

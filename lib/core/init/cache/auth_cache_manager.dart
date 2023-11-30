@@ -5,6 +5,7 @@ import '../network/dio_manager.dart';
 import 'cache_manager.dart';
 
 class AuthCacheManager {
+  const AuthCacheManager();
   // Future<bool> isFirstEntry() async {
   //   return !(await CacheManager.getBool(NetworkEnums.introOff.path) ?? false);
   // }
@@ -46,6 +47,7 @@ class AuthCacheManager {
       final token = await CacheManager.getString(NetworkEnums.token.path);
       final Token tokenParse = tokenFromJson(token!);
       if (token.isNotEmpty) {
+        print(tokenParse.accessToken);
         DioManager.instance.dio.options.headers[
             (MapEntry('Authorization', 'token ${tokenParse.accessToken}'))];
 

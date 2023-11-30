@@ -48,7 +48,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
           keyboardType: widget.keyboardType,
           validator: widget.validator,
           onSaved: widget.onSaved,
-          cursorColor: ColorConstants.onPrimary,
+          cursorColor: ColorConstants.instance.onPrimary,
           obscureText: widget.isPassword ?? false,
           style: GoogleFonts.montserrat(),
           decoration: InputDecoration(
@@ -56,13 +56,16 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             errorStyle: GoogleFonts.montserrat(),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: ColorConstants.onPrimary)),
+                borderSide:
+                    BorderSide(color: ColorConstants.instance.onPrimary)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: ColorConstants.onPrimary)),
+                borderSide:
+                    BorderSide(color: ColorConstants.instance.onPrimary)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide: const BorderSide(color: ColorConstants.onPrimary)),
+                borderSide:
+                    BorderSide(color: ColorConstants.instance.onPrimary)),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide: const BorderSide(color: Colors.red)),

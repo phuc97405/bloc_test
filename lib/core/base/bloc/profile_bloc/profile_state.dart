@@ -1,10 +1,12 @@
 part of 'profile_bloc.dart';
 
-sealed class ProfileState extends Equatable {
-  const ProfileState();
-  
+class ProfileState extends Equatable {
+  final Data? profileData;
+  const ProfileState._({this.profileData});
+
+  const ProfileState.initial() : this._();
+  const ProfileState.setProfileData(Data data) : this._(profileData: data);
+
   @override
   List<Object> get props => [];
 }
-
-final class ProfileInitial extends ProfileState {}
