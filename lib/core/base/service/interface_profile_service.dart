@@ -5,4 +5,6 @@ abstract class IProfileService {
   final DioManager dioManager;
   IProfileService(this.dioManager);
   Future<Data?> getProfile();
+  Future<Data?> updateProfile(
+      {required String nickname, required String email});
 }

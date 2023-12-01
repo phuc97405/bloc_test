@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
 import 'package:bloc_test/core/base/bloc/profile_bloc/profile_bloc.dart';
 import 'package:bloc_test/core/base/service/auth_service.dart';
@@ -20,7 +17,7 @@ void main() {
       BlocProvider<AuthBloc>(
         create: (_) => AuthBloc(
           AuthService(DioManager.instance),
-          AuthCacheManager(),
+          const AuthCacheManager(),
         ),
       ),
       BlocProvider<ProfileBloc>(

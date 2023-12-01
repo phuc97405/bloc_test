@@ -202,3 +202,32 @@ class Category {
         "userCount": userCount,
       };
 }
+
+class ReqUpdateProfile {
+  String nickname;
+  String birthday;
+  double firstLoginStage;
+  double gender;
+  String email;
+  List<double> categories;
+  bool receiveAnnoucement;
+  bool receiveEvent;
+  bool receiveNewLetter;
+  bool receiveOnlineDoctor;
+  bool receiveReminder;
+  bool showPopup;
+  ReqUpdateProfile({
+    required this.receiveAnnoucement,
+    required this.receiveEvent,
+    required this.receiveNewLetter,
+    required this.receiveOnlineDoctor,
+    required this.receiveReminder,
+    required this.showPopup,
+    required this.birthday,
+    required this.firstLoginStage,
+    required this.gender,
+    required this.email,
+    required this.categories,
+    required this.nickname,
+  });
+}

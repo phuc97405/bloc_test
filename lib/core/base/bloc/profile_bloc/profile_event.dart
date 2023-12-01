@@ -7,4 +7,13 @@ sealed class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SetProfileData extends ProfileEvent {}
+// class SetProfileData extends ProfileEvent {}
+
+class ProfileInitialFetchEvent extends ProfileEvent {}
+
+class ProfileUpdateEvent extends ProfileEvent {
+  final String nickname;
+  final String email;
+
+  const ProfileUpdateEvent(this.nickname, this.email);
+}

@@ -6,7 +6,6 @@ import 'package:bloc_test/core/base/model/login_model.dart';
 import 'package:bloc_test/core/base/service/interface_auth_service.dart';
 import 'package:bloc_test/core/constants/enums/network_enums.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
-import 'package:bloc_test/core/init/cache/cache_manager.dart';
 
 class AuthService extends IAuthService {
   AuthService(super.dioManager);

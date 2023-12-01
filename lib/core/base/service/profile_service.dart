@@ -14,7 +14,19 @@ class ProfileService extends IProfileService {
     var response = await dioManager.dio.get(
       'user',
     );
-    print('response: ${jsonEncode(response.data)}');
+    // print('response: ${jsonEncode(response.data)}');
+    if (response.statusCode == HttpStatus.ok) {
+      return ProfileUser.fromJson(response.data).data;
+    } else {
+      return throw Exception();
+    }
+  }
+
+  @override
+  Future<Data?> updateProfile(
+      {required String nickname, required String email}) async {
+    var response = await dioManager.dio.put('user/update-profile',
+        data: {'nickname': nickname, 'email': email});
     if (response.statusCode == HttpStatus.ok) {
       return ProfileUser.fromJson(response.data).data;
     } else {

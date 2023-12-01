@@ -20,11 +20,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AppStarted>((event, emit) async {
       try {
         if (await authCacheManager.isLoggedIn()) {
-          print('authen');
           await authCacheManager.updateTokenFromStorage();
           emit(const AuthState.authenticated());
         } else {
-          print('guest');
           // emit((await authCacheManager.isFirstEntry())
           //     ? const AuthState.firstEntry()
           emit(const AuthState.guest());
