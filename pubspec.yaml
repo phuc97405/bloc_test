@@ -49,6 +49,9 @@ dependencies:
 
   responsive_sizer: ^3.2.0
 
+  #Dependencies Injection
+  get_it: ^7.6.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

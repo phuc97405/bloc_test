@@ -23,7 +23,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ProfileInitialFetchEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileFetchingLoadingState());
     try {
-      // await authCacheManager.updateTokenFromStorage();
       final response = await profileService.getProfile();
       // print('profile: ${jsonEncode(response)}');
       emit(ProfileFetchingSuccessFulState(profiles: response!));

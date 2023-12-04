@@ -1,17 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc_test/core/base/bloc/auth_bloc/auth_bloc.dart';
+import 'package:bloc_test/core/base/service/auth_service.dart';
 import 'package:bloc_test/core/constants/enums/icon_enums.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/image_extensions.dart';
 import 'package:bloc_test/core/extensions/navigate_extension.dart';
 import 'package:bloc_test/core/utils/navigate_util.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
-
   @override
   State<SplashView> createState() => _SplashViewState();
 }
@@ -45,6 +46,7 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print(getIt<AuthService>());
     return Scaffold(
       body: RotationTransition(
         turns: _animation,

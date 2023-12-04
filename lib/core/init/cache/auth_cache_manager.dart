@@ -1,4 +1,5 @@
 import 'package:bloc_test/core/base/model/auth_model.dart';
+import 'package:bloc_test/locator.dart';
 
 import '../../constants/enums/network_enums.dart';
 import '../network/dio_manager.dart';
@@ -48,7 +49,7 @@ class AuthCacheManager {
       final Token tokenParse = tokenFromJson(token!);
       if (token.isNotEmpty) {
         print(tokenParse.accessToken);
-        DioManager.instance.dio.options.headers[
+        getIt<DioManager>().dio.options.headers[
             (MapEntry('Authorization', 'token ${tokenParse.accessToken}'))];
 
         /// Actually, we will not need it for this application.

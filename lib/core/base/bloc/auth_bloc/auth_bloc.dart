@@ -2,21 +2,20 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc_test/core/base/model/auth_model.dart';
+import 'package:bloc_test/core/base/service/auth_service.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../constants/enums/auth_enums.dart';
-import '../../service/interface_auth_service.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final IAuthService authService;
-  final AuthCacheManager authCacheManager;
+  AuthBloc() : super(const AuthState.unknown()) {
+    final authCacheManager = getIt<AuthCacheManager>();
 
-  AuthBloc(this.authService, this.authCacheManager)
-      : super(const AuthState.unknown()) {
     on<AppStarted>((event, emit) async {
       try {
         if (await authCacheManager.isLoggedIn()) {
@@ -37,8 +36,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<LoginRequested>(
       (event, emit) async {
-        final Token? response = await authService.login(
-            phone: event.phone, password: event.password);
+        final Token? response = await getIt<AuthService>()
+            .login(phone: event.phone, password: event.password);
         print('response token: $response');
         if (response != null) {
           await authCacheManager.updateToken(response);

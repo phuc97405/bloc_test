@@ -1,5 +1,4 @@
 import 'package:bloc_test/core/base/model/auth_model.dart';
-import 'package:bloc_test/core/base/service/interface_auth_service.dart';
 import 'package:bloc_test/core/constants/enums/network_enums.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
 import 'package:bloc_test/core/init/cache/cache_manager.dart';
@@ -9,7 +8,11 @@ class DioManager {
   static DioManager? _instance;
 
   static DioManager get instance {
-    if (_instance != null) return _instance!;
+    if (_instance != null) {
+      print('_instance != null');
+      return _instance!;
+    }
+    print('_instance = null');
     _instance = DioManager._init();
     return _instance!;
   }
@@ -18,7 +21,6 @@ class DioManager {
       'http://ec2-15-164-200-8.ap-northeast-2.compute.amazonaws.com:3000/api/v1/';
   //  'https://api-mildang.brickmate.kr/api/v1';
   late final Dio dio;
-  late IAuthService authService;
   late AuthCacheManager authCacheManager;
 
   DioManager._init() {

@@ -4,7 +4,6 @@ import 'package:bloc_test/core/components/appbar/appbar.dart';
 import 'package:bloc_test/core/components/button/button.dart';
 import 'package:bloc_test/core/components/textFormField/text_form_field.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
-import 'package:bloc_test/core/init/network/dio_manager.dart';
 import 'package:bloc_test/core/utils/validate_operations.dart';
 import 'package:bloc_test/view/home/profile_bloc/profile_bloc.dart';
 import 'package:flutter/material.dart';
@@ -26,29 +25,22 @@ class _HomeViewState extends State<HomeView> {
   TextEditingController emailController = TextEditingController();
   bool? get validate => _formKey.currentState?.validate();
   final BaseFunctions baseFunctions = BaseFunctions.instance;
-  // Future<Data?>? _loadData;
 
   @override
   void initState() {
     profileBloc.add(ProfileInitialFetchEvent());
     super.initState();
-    // context.read<ProfileBloc>().add(ProfileInitialFetchEvent());
   }
 
-  final ProfileBloc profileBloc =
-      ProfileBloc(ProfileService(DioManager.instance));
+  final ProfileBloc profileBloc = ProfileBloc(ProfileService());
 
   @override
   void didChangeDependencies() {
-    // context.read<ProfileBloc>().add(ProfileInitialFetchEvent());
     super.didChangeDependencies();
-    // _loadData ??= context.read<ProfileService>().getProfile();
   }
 
   @override
   Widget build(BuildContext context) {
-    // final profileBloc = context.watch<ProfileBloc>();
-    // print(profileBloc);
     return Scaffold(
         appBar: CustomAppBar(isHome: true),
         body: Center(
