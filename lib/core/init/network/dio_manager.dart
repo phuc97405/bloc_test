@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:bloc_test/core/base/model/auth_model.dart';
-import 'package:bloc_test/core/base/model/refresh_token_model.dart';
 import 'package:bloc_test/core/base/service/interface_auth_service.dart';
 import 'package:bloc_test/core/constants/enums/network_enums.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';

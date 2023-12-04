@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
 import 'package:flutter/material.dart';
