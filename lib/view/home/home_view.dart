@@ -1,4 +1,3 @@
-import 'package:bloc_test/core/base/bloc/profile_bloc/profile_bloc.dart';
 import 'package:bloc_test/core/base/functions/base_functions.dart';
 import 'package:bloc_test/core/base/service/profile_service.dart';
 import 'package:bloc_test/core/components/appbar/appbar.dart';
@@ -6,8 +5,8 @@ import 'package:bloc_test/core/components/button/button.dart';
 import 'package:bloc_test/core/components/textFormField/text_form_field.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
 import 'package:bloc_test/core/init/network/dio_manager.dart';
-import 'package:bloc_test/core/utils/navigate_util.dart';
 import 'package:bloc_test/core/utils/validate_operations.dart';
+import 'package:bloc_test/view/home/profile_bloc/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,24 +28,27 @@ class _HomeViewState extends State<HomeView> {
   final BaseFunctions baseFunctions = BaseFunctions.instance;
   // Future<Data?>? _loadData;
 
-  final ProfileBloc profileBloc =
-      ProfileBloc(ProfileService(DioManager.instance));
   @override
   void initState() {
     profileBloc.add(ProfileInitialFetchEvent());
     super.initState();
-
-    // context.read<ProfileBloc>().add(SetProfileData());
+    // context.read<ProfileBloc>().add(ProfileInitialFetchEvent());
   }
+
+  final ProfileBloc profileBloc =
+      ProfileBloc(ProfileService(DioManager.instance));
 
   @override
   void didChangeDependencies() {
+    // context.read<ProfileBloc>().add(ProfileInitialFetchEvent());
     super.didChangeDependencies();
     // _loadData ??= context.read<ProfileService>().getProfile();
   }
 
   @override
   Widget build(BuildContext context) {
+    // final profileBloc = context.watch<ProfileBloc>();
+    // print(profileBloc);
     return Scaffold(
         appBar: CustomAppBar(isHome: true),
         body: Center(
@@ -61,7 +63,24 @@ class _HomeViewState extends State<HomeView> {
                           current is ProfileActionState,
                       buildWhen: (previous, current) =>
                           current is! ProfileActionState,
-                      listener: (context, state) {},
+                      listener: (context, state) {
+                        print('hello${state.runtimeType}');
+                        if (state is ProfileFetchingSuccessFulState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('ProfileFetchingSuccessFulState')));
+                        } else if (state is ProfileFetchingLoadingState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('ProfileFetchingLoadingState')));
+                        } else if (state is ProfileInitialFetchEvent) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('ProfileInitialFetchEvent')));
+                        }
+                      },
                       builder: (context, state) {
                         switch (state.runtimeType) {
                           case ProfileFetchingLoadingState:
@@ -71,43 +90,36 @@ class _HomeViewState extends State<HomeView> {
                           case ProfileFetchingSuccessFulState:
                             final successState =
                                 state as ProfileFetchingSuccessFulState;
+                            phoneController.text = successState.profiles.phone;
+                            birthController.text =
+                                successState.profiles.birthday.toString();
+                            nicknameController.text =
+                                successState.profiles.nickname;
+                            emailController.text =
+                                successState.profiles.email ??
+                                    'example@gmail.com';
                             return Form(
                               key: _formKey,
-                              child: ListView.builder(
-                                  itemCount: 1,
-                                  itemBuilder: (context, index) {
-                                    phoneController.text =
-                                        successState.profiles.phone;
-                                    birthController.text = successState
-                                        .profiles.birthday
-                                        .toString();
-                                    nicknameController.text =
-                                        successState.profiles.nickname;
-                                    emailController.text =
-                                        successState.profiles.email ??
-                                            'example@gmail.com';
-                                    return Column(
-                                      children: [
-                                        _PhoneFormField(
-                                          phoneController: phoneController,
-                                        ),
-                                        _BirthFormField(
-                                          birthController: birthController,
-                                        ),
-                                        _NicknameFormField(
-                                          nicknameController:
-                                              nicknameController,
-                                        ),
-                                        _EmailFormField(
-                                          emailController: emailController,
-                                          // successState.profiles.email ?? '',
-                                        )
-                                      ],
-                                    );
-                                  }),
+                              child: Column(
+                                children: [
+                                  _PhoneFormField(
+                                    phoneController: phoneController,
+                                  ),
+                                  _BirthFormField(
+                                    birthController: birthController,
+                                  ),
+                                  _NicknameFormField(
+                                    nicknameController: nicknameController,
+                                  ),
+                                  _EmailFormField(
+                                    emailController: emailController,
+                                    // successState.profiles.email ?? '',
+                                  )
+                                ],
+                              ),
                             );
                           default:
-                            return BaseFunctions.instance.platformIndicator();
+                            return baseFunctions.platformIndicator();
                         }
                       }),
                 ),
@@ -118,9 +130,8 @@ class _HomeViewState extends State<HomeView> {
                     //     builder: (context) {
                     //       return baseFunctions.platformIndicator();
                     //     });
-                    print('${validate} + ${validate}');
                     if (validate != null && validate == true) {
-                      context.read<ProfileBloc>().add(ProfileUpdateEvent(
+                      profileBloc.add(ProfileUpdateEvent(
                           nicknameController.text, emailController.text));
                     }
                   },

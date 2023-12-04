@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:bloc_test/core/base/model/profile_model.dart';
 import 'package:bloc_test/core/base/service/interface_profile_service.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -16,6 +14,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(
     this.profileService,
   ) : super(ProfileInitial()) {
+    print('profile initial fetch');
     on<ProfileInitialFetchEvent>(profileInitialFetchEvent);
     on<ProfileUpdateEvent>(profileUpdateEvent);
   }
@@ -36,6 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   FutureOr<void> profileUpdateEvent(
       ProfileUpdateEvent event, Emitter<ProfileState> emit) async {
+    print('update profile');
     emit(ProfileFetchingLoadingState());
     try {
       final response = await profileService.updateProfile(
