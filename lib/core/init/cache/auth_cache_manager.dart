@@ -1,8 +1,8 @@
 import 'package:bloc_test/core/base/model/auth_model.dart';
+import 'package:bloc_test/core/constants/enums/network_enums.dart';
+import 'package:bloc_test/core/init/network/dio_manager.dart';
 import 'package:bloc_test/locator.dart';
 
-import '../../constants/enums/network_enums.dart';
-import '../network/dio_manager.dart';
 import 'cache_manager.dart';
 
 class AuthCacheManager {
@@ -28,9 +28,11 @@ class AuthCacheManager {
   }
 
   Future<void> updateToken(Token? token) async {
+    final dioManager = getIt<DioManager>();
+
     if (token != null) {
       await CacheManager.setString(NetworkEnums.token.path, tokenToJson(token));
-      DioManager.instance.dio.options
+      dioManager.dio.options
           .headers[(MapEntry('Authorization', 'token ${token.accessToken}'))];
 
       /// Actually, we will not need it for this application.
@@ -38,18 +40,19 @@ class AuthCacheManager {
     } else {
       if (await CacheManager.containsKey(NetworkEnums.token.path)) {
         await CacheManager.remove(NetworkEnums.token.path);
-        DioManager.instance.dio.options.headers.clear();
+        dioManager.dio.options.headers.clear();
       }
     }
   }
 
   Future<void> updateTokenFromStorage() async {
+    final dioManager = getIt<DioManager>();
     if (await CacheManager.containsKey(NetworkEnums.token.path)) {
       final token = await CacheManager.getString(NetworkEnums.token.path);
       final Token tokenParse = tokenFromJson(token!);
       if (token.isNotEmpty) {
         print(tokenParse.accessToken);
-        getIt<DioManager>().dio.options.headers[
+        dioManager.dio.options.headers[
             (MapEntry('Authorization', 'token ${tokenParse.accessToken}'))];
 
         /// Actually, we will not need it for this application.

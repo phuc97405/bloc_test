@@ -20,7 +20,8 @@ class DioManager {
   final String _baseUrl =
       'http://ec2-15-164-200-8.ap-northeast-2.compute.amazonaws.com:3000/api/v1/';
   //  'https://api-mildang.brickmate.kr/api/v1';
-  late final Dio dio;
+  late Dio dio;
+  // var dio = getIt<Dio>();
   late AuthCacheManager authCacheManager;
 
   DioManager._init() {
@@ -57,6 +58,7 @@ class DioManager {
     try {
       final token = await CacheManager.getString(NetworkEnums.token.path);
       final Token tokenParse = tokenFromJson(token!);
+      print(dio.options);
       if (token.isNotEmpty) {
         dio.options.headers['Authorization'] =
             'Bearer ${tokenParse.refreshToken}';

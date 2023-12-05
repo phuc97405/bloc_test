@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:bloc_test/core/base/model/auth_model.dart';
 import 'package:bloc_test/core/base/service/auth_service.dart';
+import 'package:bloc_test/core/constants/enums/auth_enums.dart';
 import 'package:bloc_test/core/init/cache/auth_cache_manager.dart';
 import 'package:bloc_test/locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../constants/enums/auth_enums.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

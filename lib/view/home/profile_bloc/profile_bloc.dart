@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc_test/core/base/model/profile_model.dart';
-import 'package:bloc_test/core/base/service/interface_profile_service.dart';
+import 'package:bloc_test/core/base/service/profile_service.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +10,14 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final IProfileService profileService;
+  // final IProfileService profileService;
+
+  final profileService = getIt<ProfileService>();
 
   ProfileBloc(
-    this.profileService,
-  ) : super(ProfileInitial()) {
+      // this.profileService,
+      )
+      : super(ProfileInitial()) {
     print('profile initial fetch');
     on<ProfileInitialFetchEvent>(profileInitialFetchEvent);
     on<ProfileUpdateEvent>(profileUpdateEvent);

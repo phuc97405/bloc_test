@@ -1,5 +1,4 @@
 import 'package:bloc_test/core/base/functions/base_functions.dart';
-import 'package:bloc_test/core/base/service/profile_service.dart';
 import 'package:bloc_test/core/components/appbar/appbar.dart';
 import 'package:bloc_test/core/components/button/button.dart';
 import 'package:bloc_test/core/components/textFormField/text_form_field.dart';
@@ -32,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
   }
 
-  final ProfileBloc profileBloc = ProfileBloc(ProfileService());
+  final ProfileBloc profileBloc = ProfileBloc();
 
   @override
   void didChangeDependencies() {
