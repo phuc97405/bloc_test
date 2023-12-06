@@ -1,5 +1,6 @@
 import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/constants/app/string_constants.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -15,29 +16,29 @@ class TextThemeLight {
   final TextStyle headline1 = TextStyle(
     fontSize: 17.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.instance.black,
+    color: getIt<ColorConstants>().black,
   );
 
   final TextStyle headline2 = TextStyle(
     fontSize: 18.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.instance.black,
+    color: getIt<ColorConstants>().black,
   );
 
   final TextStyle subtitle1 = TextStyle(
     fontSize: 11.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.instance.black,
+    color: getIt<ColorConstants>().black,
   );
 
   final TextStyle subtitle2 = TextStyle(
     fontSize: 15.sp,
     fontFamily: StringConstants.fontFamily,
-    color: ColorConstants.instance.black,
+    color: getIt<ColorConstants>().black,
   );
 
   final TextStyle button = TextStyle(
     fontSize: 17.sp,
-    color: Colors.white,
+    color: getIt<ColorConstants>().black,
   );
 }

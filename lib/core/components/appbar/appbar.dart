@@ -5,6 +5,7 @@ import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/image_extensions.dart';
 import 'package:bloc_test/core/extensions/num_extensions.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +29,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: ColorConstants.instance.primary,
+      backgroundColor: getIt<ColorConstants>().primary,
       // ColorConstants.primary,
       elevation: 1,
       centerTitle: true,
@@ -61,7 +62,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 },
                 icon: Icon(
                   Icons.logout_outlined,
-                  color: ColorConstants.instance.black,
+                  color: getIt<ColorConstants>().black,
                 ),
               )
             : const SizedBox.shrink(),

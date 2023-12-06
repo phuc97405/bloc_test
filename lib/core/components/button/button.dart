@@ -1,4 +1,5 @@
 import 'package:bloc_test/core/extensions/context_extensions.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/app/color_constants.dart';
@@ -21,7 +22,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
-            backgroundColor: ColorConstants.instance.onPrimary,
+            backgroundColor: getIt<ColorConstants>().onPrimary,
             fixedSize: Size(
               context.dynamicWidth(1),
               context.dynamicHeight(0.06),

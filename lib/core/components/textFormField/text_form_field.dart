@@ -2,6 +2,7 @@ import 'package:bloc_test/core/components/text/custom_text.dart';
 import 'package:bloc_test/core/constants/app/color_constants.dart';
 import 'package:bloc_test/core/extensions/context_extensions.dart';
 import 'package:bloc_test/core/extensions/num_extensions.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -48,7 +49,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
           keyboardType: widget.keyboardType,
           validator: widget.validator,
           onSaved: widget.onSaved,
-          cursorColor: ColorConstants.instance.onPrimary,
+          cursorColor: getIt<ColorConstants>().onPrimary,
           obscureText: widget.isPassword ?? false,
           style: GoogleFonts.montserrat(),
           decoration: InputDecoration(
@@ -57,15 +58,15 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide:
-                    BorderSide(color: ColorConstants.instance.onPrimary)),
+                    BorderSide(color: getIt<ColorConstants>().onPrimary)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide:
-                    BorderSide(color: ColorConstants.instance.onPrimary)),
+                    BorderSide(color: getIt<ColorConstants>().onPrimary)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide:
-                    BorderSide(color: ColorConstants.instance.onPrimary)),
+                    BorderSide(color: getIt<ColorConstants>().onPrimary)),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
                 borderSide: const BorderSide(color: Colors.red)),

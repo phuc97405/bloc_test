@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc_test/core/constants/app/color_constants.dart';
+import 'package:bloc_test/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class BaseFunctions {
       child: Platform.isIOS
           ? const CupertinoActivityIndicator()
           : CircularProgressIndicator(
-              color: ColorConstants.instance.onPrimary,
+              color: getIt<ColorConstants>().onPrimary,
             ),
     );
   }
