@@ -35,22 +35,22 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
   }
 
-  FutureBuilder _body() {
-    final apiService =
-        ApiService(Dio(BaseOptions(contentType: 'application/json')));
-    return FutureBuilder(
-        future: apiService.getPosts(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final List<PostModel> posts = snapshot.data;
-            return _post(posts);
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
-  }
+  // FutureBuilder _body() {
+  //   final apiService =
+  //       ApiService(Dio(BaseOptions(contentType: 'application/json')));
+  //   return FutureBuilder(
+  //       future: apiService.getPosts(),
+  //       builder: (context, snapshot) {
+  //         if (snapshot.connectionState == ConnectionState.done) {
+  //           final List<PostModel> posts = snapshot.data;
+  //           return _post(posts);
+  //         } else {
+  //           return Center(
+  //             child: CircularProgressIndicator(),
+  //           );
+  //         }
+  //       });
+  // }
 
   Widget _post(List<PostModel> posts) {
     return ListView.builder(
@@ -83,97 +83,100 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: CustomAppBar(isHome: true), body: _body()
+    return Scaffold(
+        appBar: CustomAppBar(isHome: true),
+        body:
+            // _body()
 
-        // Center(
-        //   child: Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 20),
-        //     child: Column(
-        //       children: [
-        //         Expanded(
-        //           child: BlocConsumer<ProfileBloc, ProfileState>(
-        //               bloc: profileBloc,
-        //               listenWhen: (previous, current) =>
-        //                   current is ProfileActionState,
-        //               buildWhen: (previous, current) =>
-        //                   current is! ProfileActionState,
-        //               listener: (context, state) {
-        //                 print('hello${state.runtimeType}');
-        //                 if (state is ProfileFetchingSuccessFulState) {
-        //                   ScaffoldMessenger.of(context).showSnackBar(
-        //                       const SnackBar(
-        //                           content:
-        //                               Text('ProfileFetchingSuccessFulState')));
-        //                 } else if (state is ProfileFetchingLoadingState) {
-        //                   ScaffoldMessenger.of(context).showSnackBar(
-        //                       const SnackBar(
-        //                           content:
-        //                               Text('ProfileFetchingLoadingState')));
-        //                 } else if (state is ProfileInitialFetchEvent) {
-        //                   ScaffoldMessenger.of(context).showSnackBar(
-        //                       const SnackBar(
-        //                           content: Text('ProfileInitialFetchEvent')));
-        //                 }
-        //               },
-        //               builder: (context, state) {
-        //                 switch (state.runtimeType) {
-        //                   case ProfileFetchingLoadingState:
-        //                     return baseFunctions.platformIndicator();
-        //                   case ProfileFetchingErrorState:
-        //                     return const Text('Error fetching');
-        //                   case ProfileFetchingSuccessFulState:
-        //                     final successState =
-        //                         state as ProfileFetchingSuccessFulState;
-        //                     phoneController.text = successState.profiles.phone;
-        //                     birthController.text =
-        //                         successState.profiles.birthday.toString();
-        //                     nicknameController.text =
-        //                         successState.profiles.nickname;
-        //                     emailController.text =
-        //                         successState.profiles.email ??
-        //                             'example@gmail.com';
-        //                     return Form(
-        //                       key: _formKey,
-        //                       child: Column(
-        //                         children: [
-        //                           _PhoneFormField(
-        //                             phoneController: phoneController,
-        //                           ),
-        //                           _BirthFormField(
-        //                             birthController: birthController,
-        //                           ),
-        //                           _NicknameFormField(
-        //                             nicknameController: nicknameController,
-        //                           ),
-        //                           _EmailFormField(
-        //                             emailController: emailController,
-        //                             // successState.profiles.email ?? '',
-        //                           )
-        //                         ],
-        //                       ),
-        //                     );
-        //                   default:
-        //                     return baseFunctions.platformIndicator();
-        //                 }
-        //               }),
-        //         ),
-        //         _UpdateButton(
-        //           onTap: () {
-        //             // showDialog(
-        //             //     context: context,
-        //             //     builder: (context) {
-        //             //       return baseFunctions.platformIndicator();
-        //             //     });
-        //             if (validate != null && validate == true) {
-        //               profileBloc.add(ProfileUpdateEvent(
-        //                   nicknameController.text, emailController.text));
-        //             }
-        //           },
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // )
+            Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Expanded(
+                  child: BlocConsumer<ProfileBloc, ProfileState>(
+                      bloc: profileBloc,
+                      listenWhen: (previous, current) =>
+                          current is ProfileActionState,
+                      buildWhen: (previous, current) =>
+                          current is! ProfileActionState,
+                      listener: (context, state) {
+                        print('hello${state.runtimeType}');
+                        if (state is ProfileFetchingSuccessFulState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('ProfileFetchingSuccessFulState')));
+                        } else if (state is ProfileFetchingLoadingState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text('ProfileFetchingLoadingState')));
+                        } else if (state is ProfileInitialFetchEvent) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('ProfileInitialFetchEvent')));
+                        }
+                      },
+                      builder: (context, state) {
+                        switch (state.runtimeType) {
+                          case ProfileFetchingLoadingState:
+                            return baseFunctions.platformIndicator();
+                          case ProfileFetchingErrorState:
+                            return const Text('Error fetching');
+                          case ProfileFetchingSuccessFulState:
+                            final successState =
+                                state as ProfileFetchingSuccessFulState;
+                            phoneController.text = successState.profiles.phone;
+                            birthController.text =
+                                successState.profiles.birthday.toString();
+                            nicknameController.text =
+                                successState.profiles.nickname;
+                            emailController.text =
+                                successState.profiles.email ??
+                                    'example@gmail.com';
+                            return Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  _PhoneFormField(
+                                    phoneController: phoneController,
+                                  ),
+                                  _BirthFormField(
+                                    birthController: birthController,
+                                  ),
+                                  _NicknameFormField(
+                                    nicknameController: nicknameController,
+                                  ),
+                                  _EmailFormField(
+                                    emailController: emailController,
+                                    // successState.profiles.email ?? '',
+                                  )
+                                ],
+                              ),
+                            );
+                          default:
+                            return baseFunctions.platformIndicator();
+                        }
+                      }),
+                ),
+                _UpdateButton(
+                  onTap: () {
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) {
+                    //       return baseFunctions.platformIndicator();
+                    //     });
+                    if (validate != null && validate == true) {
+                      profileBloc.add(ProfileUpdateEvent(
+                          nicknameController.text, emailController.text));
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        )
 
         // BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
         //   return Text(jsonEncode(state.profileData));

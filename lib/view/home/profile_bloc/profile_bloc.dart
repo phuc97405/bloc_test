@@ -28,7 +28,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileFetchingLoadingState());
     try {
       final response = await profileService.getProfile();
-      // print('profile: ${jsonEncode(response)}');
+      print('profile: ${(response)}');
       emit(ProfileFetchingSuccessFulState(profiles: response!));
     } catch (e) {
       emit(ProfileFetchingErrorState());
